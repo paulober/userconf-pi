@@ -14,9 +14,9 @@ if [ "$(raspi-config nonint get_boot_cli)" -ne 0 ]; then
     fi
     IMG_VER="$(grep -s -m1 -o '[[:digit:]]\{4\}-[[:digit:]]\{2\}-[[:digit:]]\{2\}' /etc/rpi-issue)"
     if [ -f /var/lib/userconf-pi/autologin ] || [ "$IMG_VER" == "2022-04-04" ]; then
-        SUDO_USER="$1" raspi-config nonint do_boot_behaviour B4
+        SUDO_USER="$1" raspi-config nonint do_boot_behaviour B4 $1
     else
-        SUDO_USER="$1" raspi-config nonint do_boot_behaviour B3
+        SUDO_USER="$1" raspi-config nonint do_boot_behaviour B3 $1
     fi
 
     # remove the autostart for the wizard
@@ -32,9 +32,9 @@ if [ "$(raspi-config nonint get_boot_cli)" -ne 0 ]; then
 	EOF
 else
     if [ -f /var/lib/userconf-pi/autologin ]; then
-        SUDO_USER="$1" raspi-config nonint do_boot_behaviour B2
+        SUDO_USER="$1" raspi-config nonint do_boot_behaviour B2 $1
     else
-        SUDO_USER="$1" raspi-config nonint do_boot_behaviour B1
+        SUDO_USER="$1" raspi-config nonint do_boot_behaviour B1 $1
     fi
 fi
 
